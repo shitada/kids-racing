@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>🏎️ キッズレーシング 🏎️</title>
+  <meta name="description" content="5だいの くるまで ゴールまでの はやさを きそう！ こども むけ レースゲーム。ぜん10ステージ！" />
+
+  <!-- PWA / iOS ホーム画面アイコン -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1e1e3c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="キッズレーシング" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png" />
+  <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-wrap">
+    <canvas id="game" width="800" height="650"></canvas>
+
+    <!-- タッチ操作 (タッチ端末のみ表示) -->
+    <div id="touch-controls" aria-hidden="true">
+      <div class="touch-left">
+        <button class="tbtn" id="btn-left" aria-label="ひだり">◀</button>
+        <button class="tbtn" id="btn-right" aria-label="みぎ">▶</button>
+      </div>
+      <div class="touch-right">
+        <button class="tbtn brake" id="btn-brake" aria-label="ブレーキ">■</button>
+        <button class="tbtn accel" id="btn-accel" aria-label="かそく">▲</button>
+      </div>
+    </div>
+
+    <!-- もどる/ホーム (タッチのメニュー用) -->
+    <button id="touch-home" aria-label="もどる">↩</button>
+
+    <!-- サウンド有効化オーバーレイ -->
+    <div id="start-overlay">
+      <div class="start-card">
+        <div class="start-emoji">🏎️</div>
+        <div class="start-title">キッズレーシング</div>
+        <div class="start-sub">タップして スタート</div>
+        <div class="start-hint">おとが でます</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

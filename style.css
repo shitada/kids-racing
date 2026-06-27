@@ -1,0 +1,224 @@
+/* キッズレーシング - ブラウザ版スタイル */
+:root {
+  --game-w: 800;
+  --game-h: 650;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #14142e;
+  overflow: hidden;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    "YuGothic", "Meiryo", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+#game-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 20%, #2a2a55 0%, #14142e 70%);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+#game {
+  display: block;
+  background: #1e1e3c;
+  /* 800x650 のアスペクト比を保ったまま画面に合わせて拡大 */
+  width: min(100vw, calc(100vh * (800 / 650)));
+  height: auto;
+  max-height: 100vh;
+  aspect-ratio: 800 / 650;
+  image-rendering: -webkit-optimize-contrast;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 6px;
+  touch-action: none;
+}
+
+/* ===== タッチ操作 ===== */
+#touch-controls {
+  display: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+body.touch #touch-controls.active {
+  display: block;
+}
+
+/* もどる/ホームボタン */
+#touch-home {
+  display: none;
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 10px);
+  right: calc(env(safe-area-inset-right) + 10px);
+  z-index: 30;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: rgba(20, 20, 40, 0.5);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+body.touch #touch-home.active {
+  display: flex;
+}
+
+#touch-home:active {
+  background: rgba(80, 110, 200, 0.8);
+}
+
+.touch-left,
+.touch-right {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom) + 18px);
+  display: flex;
+  gap: 18px;
+  pointer-events: none;
+}
+
+.touch-left {
+  left: calc(env(safe-area-inset-left) + 18px);
+}
+
+.touch-right {
+  right: calc(env(safe-area-inset-right) + 18px);
+  align-items: flex-end;
+}
+
+.tbtn {
+  pointer-events: auto;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  background: rgba(40, 50, 90, 0.55);
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  transition: transform 0.05s, background 0.05s;
+}
+
+.tbtn:active {
+  transform: scale(0.92);
+  background: rgba(80, 110, 200, 0.8);
+}
+
+.tbtn.accel {
+  width: 100px;
+  height: 100px;
+  font-size: 40px;
+  background: rgba(50, 200, 80, 0.55);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.tbtn.accel:active {
+  background: rgba(70, 230, 110, 0.85);
+}
+
+.tbtn.brake {
+  background: rgba(220, 60, 60, 0.5);
+}
+
+.tbtn.brake:active {
+  background: rgba(240, 90, 90, 0.85);
+}
+
+/* ===== サウンド有効化オーバーレイ ===== */
+#start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 35%, #2a2a55 0%, #0e0e22 75%);
+  cursor: pointer;
+}
+
+#start-overlay.hidden {
+  display: none;
+}
+
+.start-card {
+  text-align: center;
+  color: #fff;
+  animation: pop 0.6s ease;
+}
+
+.start-emoji {
+  font-size: 90px;
+  animation: bob 1.6s ease-in-out infinite;
+}
+
+.start-title {
+  font-size: 44px;
+  font-weight: bold;
+  color: #ffdc32;
+  text-shadow: 3px 3px 0 rgba(80, 60, 0, 0.6);
+  margin-top: 6px;
+  letter-spacing: 2px;
+}
+
+.start-sub {
+  margin-top: 26px;
+  font-size: 26px;
+  font-weight: bold;
+  padding: 14px 34px;
+  display: inline-block;
+  border-radius: 14px;
+  background: #32c850;
+  border: 3px solid #fff;
+  animation: glow 1.2s ease-in-out infinite;
+}
+
+.start-hint {
+  margin-top: 18px;
+  font-size: 16px;
+  color: #b4b4d2;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes glow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(50, 200, 80, 0); }
+  50% { transform: scale(1.05); box-shadow: 0 0 24px rgba(50, 200, 80, 0.7); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
